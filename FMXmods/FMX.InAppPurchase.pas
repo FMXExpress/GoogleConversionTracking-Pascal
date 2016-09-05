@@ -38,6 +38,7 @@ type
   private
     FProductID: string;
     FPrice: Double;
+    FCurrencyCode: string;
     FLocalizedPrice: string;
     FLocalizedTitle: string;
     FLocalizedDescription: string;
@@ -48,12 +49,13 @@ type
     // Android supplies just a localized price string, not an actual value
     // so on Android the Price property will have this constant as a value
     const PriceNotAvailable = -1;
-    constructor Create(const ProductID: string; Price: Double;
+    constructor Create(const ProductID: string; Price: Double; CurrencyCode: string;
       const LocalizedPrice, LocalizedTitle, LocalizedDescription: string;
       Downloadable: Boolean; const DownloadContentLengths: TDownloadLengths;
       DownloadContentVersion: string);
     property ProductID: string read FProductID;
     property Price: Double read FPrice;
+    property CurrencyCode: string read FCurrencyCode;
     property LocalizedPrice: string read FLocalizedPrice;
     property LocalizedTitle: string read FLocalizedTitle;
     property LocalizedDescription: string read FLocalizedDescription;
@@ -1036,13 +1038,14 @@ end;
 
 { TProduct }
 
-constructor TProduct.Create(const ProductID: string; Price: Double;
+constructor TProduct.Create(const ProductID: string; Price: Double; CurrencyCode: string;
   const LocalizedPrice, LocalizedTitle, LocalizedDescription: string; Downloadable: Boolean;
   const DownloadContentLengths: TDownloadLengths; DownloadContentVersion: string);
 begin
   inherited Create;
   FProductID := ProductID;
   FPrice := Price;
+  FCurrencyCode := CurrencyCode;
   FLocalizedPrice := LocalizedPrice;
   FLocalizedTitle := LocalizedTitle;
   FLocalizedDescription := LocalizedDescription;

@@ -79,6 +79,7 @@ var
   ProductID: string;
   Price: Double;
   NumFormatter: NSNumberFormatter;
+  CurrencyCode: string;
   LocalizedPrice: string;
   LocalizedTitle: string;
   LocalizedDescription: string;
@@ -94,6 +95,7 @@ begin
   NumFormatter.setNumberStyle(NSNumberFormatterCurrencyStyle);
   NumFormatter.setLocale(Product.priceLocale);
   LocalizedPrice := NSStrToStr(NumFormatter.stringFromNumber(Product.Price));
+  CurrencyCode := NSStrToStr(NumFormatter.currencyCode);
                                              
   NumFormatter.release;
   LocalizedTitle := NSStrToStr(Product.LocalizedTitle);
@@ -104,7 +106,7 @@ begin
   for I := 0 to Pred(Length(DownloadContentLengths)) do
     DownloadContentLengths[I] := TNSNumber.Wrap(Product.DownloadContentLengths.objectAtIndex(I)).longLongValue;
   DownloadContentVersion := NSStrToStr(Product.DownloadContentVersion);
-  Result := TProduct.Create(ProductID, Price, LocalizedPrice, LocalizedTitle, LocalizedDescription, Downloadable,
+  Result := TProduct.Create(ProductID, Price, CurrencyCode, LocalizedPrice, LocalizedTitle, LocalizedDescription, Downloadable,
     DownloadContentLengths, DownloadContentVersion);
 end;
 
