@@ -19,10 +19,11 @@ uses
   Macapi.CoreFoundation,
   Macapi.CoreServices,
   Macapi.Dispatch,
-  //Macapi.Foundation,  <- needed to use reportUniversalLinkWithUserActivity
+  Macapi.Foundation,
   Macapi.Mach,
   Macapi.ObjCRuntime,
   Macapi.ObjectiveC,
+  Macapi.QuartzCore,
   iOSapi.CocoaTypes,
   iOSapi.Foundation;
 
@@ -81,7 +82,8 @@ type
     [MethodName('reportWithProductID:value:isRepeatable:')]
     { class } procedure reportWithProductIDValueIsRepeatable
       (productID: NSString; value: NSString; isRepeatable: Boolean); cdecl;
-//    { class } procedure reportUniversalLinkWithUserActivity (userActivity: NSUserActivity); cdecl;
+    { class } procedure reportUniversalLinkWithUserActivity
+      (userActivity: NSUserActivity); cdecl;
     { class } function registerReferrer(clickURL: NSURL): Boolean; cdecl;
   end;
 
@@ -238,28 +240,7 @@ const
   libGoogleConversionTracking =
     'libGoogleConversionTracking.a';
 
-
-function FakeLoader: DCTConversionReporter; cdecl; external libGoogleConversionTracking name 'OBJC_CLASS_$_SomeClassName';
-
 implementation
-
-
-{$IFDEF CPUARM}
-initialization
-  {$UNDEF OptiIsOn}
-  {$IFOPT O+} //if optimization is on
-    {$DEFINE OptiIsOn} //remember it was on
-    {$O-} //turn optimization off
-  {$ENDIF}
-
-    if False then
-      FakeLoader;
-  {$IFDEF OptiIsOn}
-    {$O+}
-    {$UNDEF OptiIsOn}
-  {$ENDIF}
-{$ENDIF}
-
 
 {$IF defined(IOS) and NOT defined(CPUARM)}
 
@@ -268,6 +249,9 @@ uses
 
 var
   GoogleConversionTrackingModule: THandle;
+
+{$ENDIF IOS}
+{$IF defined(IOS) and NOT defined(CPUARM)}
 
 initialization
 
