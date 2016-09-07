@@ -245,23 +245,6 @@ function FakeLoader: DCTConversionReporter; cdecl; external libGoogleConversionT
 implementation
 
 
-{$IFDEF CPUARM}
-initialization
-  {$UNDEF OptiIsOn}
-  {$IFOPT O+} //if optimization is on
-    {$DEFINE OptiIsOn} //remember it was on
-    {$O-} //turn optimization off
-  {$ENDIF}
-
-//    if False then
-//      FakeLoader;
-  {$IFDEF OptiIsOn}
-    {$O+}
-    {$UNDEF OptiIsOn}
-  {$ENDIF}
-{$ENDIF}
-
-
 {$IF defined(IOS) and NOT defined(CPUARM)}
 
 uses

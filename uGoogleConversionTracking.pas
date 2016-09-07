@@ -6,9 +6,9 @@ uses
   iOSapi.GoogleConversionTracking, Macapi.Helpers;
 
 const
-  cConversionIDStr = '1071403861';
-  cConversionLabelRun = 'gAhuCK6Ow2kQ1abx_gM';
-  cConversionLabelPurchase = 'a3SOCKDN42kQ1abx_gM';
+  cConversionIDStr = '0123456789'; //<- input your own Google tracker ID here
+  cConversionLabelRun = 'abcdefgh'; //<- input your own Google conversion ID here
+  cConversionLabelPurchase = 'abcdefgh'; //<- input your own Google conversion ID here
 
 type
   tGoogleConversionTracking = class
