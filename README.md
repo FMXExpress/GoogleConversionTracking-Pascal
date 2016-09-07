@@ -2,9 +2,9 @@
 
 Headers translated to Object Pascal using SdkTransform in Delphi Berlin.
 
-Untested.
+Tested to work on Delphi Berlin + XCode 7.3.1 + iOS 9.3.5
 
 Download the AdWords Conversion Tracking SDK:
 https://developers.google.com/app-conversion-tracking/ios/
 
-Deploy the *.a file with your project.
+Save the *.a file in your project search path. It will be automatically linked into your binary.
