@@ -1,0 +1,44 @@
+Index: FMX.InAppPurchase.pas
+===================================================================
+--- FMX.InAppPurchase.pas	(revision 9096)
++++ FMX.InAppPurchase.pas	(revision 9097)
+@@ -38,6 +38,7 @@
+   private
+     FProductID: string;
+     FPrice: Double;
++    FCurrencyCode: string;
+     FLocalizedPrice: string;
+     FLocalizedTitle: string;
+     FLocalizedDescription: string;
+@@ -48,12 +49,13 @@
+     // Android supplies just a localized price string, not an actual value
+     // so on Android the Price property will have this constant as a value
+     const PriceNotAvailable = -1;
+-    constructor Create(const ProductID: string; Price: Double;
++    constructor Create(const ProductID: string; Price: Double; CurrencyCode: string;
+       const LocalizedPrice, LocalizedTitle, LocalizedDescription: string;
+       Downloadable: Boolean; const DownloadContentLengths: TDownloadLengths;
+       DownloadContentVersion: string);
+     property ProductID: string read FProductID;
+     property Price: Double read FPrice;
++    property CurrencyCode: string read FCurrencyCode;
+     property LocalizedPrice: string read FLocalizedPrice;
+     property LocalizedTitle: string read FLocalizedTitle;
+     property LocalizedDescription: string read FLocalizedDescription;
+@@ -1036,7 +1038,7 @@
+ 
+ { TProduct }
+ 
+-constructor TProduct.Create(const ProductID: string; Price: Double;
++constructor TProduct.Create(const ProductID: string; Price: Double; CurrencyCode: string;
+   const LocalizedPrice, LocalizedTitle, LocalizedDescription: string; Downloadable: Boolean;
+   const DownloadContentLengths: TDownloadLengths; DownloadContentVersion: string);
+ begin
+@@ -1043,6 +1045,7 @@
+   inherited Create;
+   FProductID := ProductID;
+   FPrice := Price;
++  FCurrencyCode := CurrencyCode;
+   FLocalizedPrice := LocalizedPrice;
+   FLocalizedTitle := LocalizedTitle;
+   FLocalizedDescription := LocalizedDescription;
