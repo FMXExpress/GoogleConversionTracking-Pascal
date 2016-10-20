@@ -1,4 +1,4 @@
-# AdWords Conversion Tracking SDK for iOS
+# AdWords Conversion Tracking SDK for iOS and Android
 
 Headers translated to Object Pascal using SdkTransform in Delphi Berlin.
 
